@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import FormProducts from "../../FormProducts"
 import { Tooltip } from "@mui/material";
+import { login } from '../../../Api/index';
 
 const products = [
   {
@@ -31,8 +32,14 @@ const products = [
 ];
 
 function ProductsPage() {
-
   const [openModal, setOpenModal] = useState(false);
+
+  useEffect(() => {
+    (async () => {
+      const response = await login();
+      console.log(response);
+    })()
+  }, [])  
 
   return (
     <section className="w-full h-screen bg-[#F4F6F8] flex justify-center items-center">
