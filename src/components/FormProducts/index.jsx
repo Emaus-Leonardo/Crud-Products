@@ -5,6 +5,7 @@ function FormProducts() {
   return (
     <main className="flex justify-center items-center">
       <form className="flex flex-col gap-5 w-[400px]">
+
         <div className="hidden flex flex-col gap-1">
           <label htmlFor="">Id</label>
           <input type="number" />
@@ -25,11 +26,6 @@ function FormProducts() {
           <input type="number" />
         </div>
 
-        <div className="hidden flex flex-col gap-1">
-          <label htmlFor="">Status</label>
-          <input type="text" />
-        </div>
-
         <div className="flex flex-col gap-1">
           <label htmlFor="">Quantidade</label>
           <input type="number" />
@@ -41,6 +37,7 @@ function FormProducts() {
           >
             Cadastrar
           </button>
+          
       </form>
     </main>
   );
