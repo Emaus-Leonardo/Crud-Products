@@ -1,42 +1,25 @@
 import React, { useState, useEffect } from "react";
-import FormProducts from "../../FormProducts";
 import { Tooltip } from "@mui/material";
-import { login } from '../../../Api/index';
 
-const products = [
-  {
-    id: 1,
-    name: "Produto 1",
-    descricao: "Descrição Produto 1",
-    price: 10.0,
-    status: "Ativo",
-    quantidadeDoEstoque: 10,
-  },
-  {
-    id: 2,
-    name: "Produto 2",
-    descricao: "Descrição Produto 2",
-    price: 20.0,
-    status: "Inativo",
-    quantidadeDoEstoque: 20,
-  },
-  {
-    id: 3,
-    name: "Produto 3",
-    descricao: "Descrição Produto 3",
-    price: 30.0,
-    status: "Ativo",
-    quantidadeDoEstoque: 30,
-  },
-];
+
+import FormProducts from "../../FormProducts";
+import { login, listProducts } from '../../../Api/index';
 
 function ProductsPage() {
   const [openModal, setOpenModal] = useState(false);
+  const [products, setProducts] = useState([]);
 
   useEffect(() => {
     (async () => {
-      const response = await login();
-      console.log(response);
+      try {
+        const tokenResponse = await login();
+        const productListResponse = await listProducts(tokenResponse.access_token);
+        const productList = productListResponse.data; 
+        setProducts(productList);
+        console.log(productList); 
+      } catch (error) {
+        console.error("Erro ao carregar os produtos:", error);
+      }
     })();
   }, []);
 
@@ -84,7 +67,7 @@ function ProductsPage() {
             </thead>
 
             <tbody>
-              {products.map((product) => (
+              {Array.isArray(products) && products.map((product) => (
                 <tr key={product.id}>
                   <td className="hidden  py-2 px-4 border-b border-gray-200">
                     {product.id}
@@ -93,7 +76,7 @@ function ProductsPage() {
                     {product.name}
                   </td>
                   <td className="py-2 px-4 border-b border-gray-200">
-                    {product.descricao}
+                    {product.description}
                   </td>
                   <td className="py-2 px-4 border-b border-gray-200">
                     R${product.price.toFixed(2)}
@@ -102,11 +85,12 @@ function ProductsPage() {
                     {product.status}
                   </td>
                   <td className="py-2 px-4 border-b border-gray-200">
-                    {product.quantidadeDoEstoque}
+                    {product.stock_quantity}
                   </td>
                 </tr>
               ))}
             </tbody>
+
           </table>
         </div>
       </div>
@@ -146,6 +130,5 @@ function ProductsPage() {
     </section>
   );
 }
-
 
 export default ProductsPage;
