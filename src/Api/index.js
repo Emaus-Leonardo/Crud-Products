@@ -1,5 +1,6 @@
 import axios from 'axios';
 
+// Login que recebe o token para as requisições do CRUD
 export async function login() {
   const user = {
     email: 'emausleonardo123@gmail.com',
@@ -24,6 +25,7 @@ export async function login() {
   return response;
 }
 
+// Listagem dos Produtos
 export async function listProducts(token) {
   try {
     const response = await axios(
@@ -42,6 +44,7 @@ export async function listProducts(token) {
   }
 }
 
+// Create de produtos
 export async function createProducts(token, dados) {
   try {
     const response = await axios(
