@@ -41,3 +41,23 @@ export async function listProducts(token) {
     return error;
   }
 }
+
+export async function createProducts(token, dados) {
+  try {
+    const response = await axios(
+      {
+        method: "POST",
+        url: 'http://34.71.240.100/api/product/create',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        },
+        data: dados,
+        withCredentials: false,
+      }
+    );
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+}

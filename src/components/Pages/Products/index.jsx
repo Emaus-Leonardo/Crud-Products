@@ -9,14 +9,27 @@ function ProductsPage() {
   const [openModal, setOpenModal] = useState(false);
   const [products, setProducts] = useState([]);
 
+  const getStatusText = (status) => {
+    switch (status) {
+      case 1:
+        return "Em Estoque";
+      case 2:
+        return "Em Reposição";
+      case 3:
+        return "Em Falta";
+      default:
+        return "";
+    }
+  };
+
   useEffect(() => {
     (async () => {
       try {
         const tokenResponse = await login();
         const productListResponse = await listProducts(tokenResponse.access_token);
-        const productList = productListResponse.data; 
+        const productList = productListResponse.data;
         setProducts(productList);
-        console.log(productList); 
+        console.log(productList);
       } catch (error) {
         console.error("Erro ao carregar os produtos:", error);
       }
@@ -67,7 +80,7 @@ function ProductsPage() {
             </thead>
 
             <tbody>
-              {Array.isArray(products) && products.map((product) => (
+              {Array.isArray(products) && products.slice(0, 8).map((product) => (
                 <tr key={product.id}>
                   <td className="hidden  py-2 px-4 border-b border-gray-200">
                     {product.id}
@@ -82,7 +95,7 @@ function ProductsPage() {
                     R${product.price.toFixed(2)}
                   </td>
                   <td className="py-2 px-4 border-b border-gray-200">
-                    {product.status}
+                    {getStatusText(product.status)}
                   </td>
                   <td className="py-2 px-4 border-b border-gray-200">
                     {product.stock_quantity}
