@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Tooltip } from "@mui/material";
 import { Pencil, Trash } from "@phosphor-icons/react";
 import { DataGrid } from "@mui/x-data-grid";
 import FormProducts from "../../FormProducts";
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 import { login, listProducts, deleteProduct } from '../../../Api/index';
 
 function ProductsPage() {
@@ -11,6 +13,7 @@ function ProductsPage() {
   const [editProducts, setEditProducts] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
   const [paginationModel, setPaginationModel] = useState({ pageSize: 6, page: 0 });
+  const formRef = useRef();
 
   const getStatusText = (status) => {
     switch (status) {
@@ -25,18 +28,20 @@ function ProductsPage() {
     }
   };
 
+  const fetchProducts = async () => {
+    try {
+      const tokenResponse = await login();
+      const productListResponse = await listProducts(tokenResponse.access_token);
+      const productList = productListResponse.data;
+      setProducts(productList);
+      console.log(productList);
+    } catch (error) {
+      console.error("Erro ao carregar os produtos:", error);
+    }
+  };
+
   useEffect(() => {
-    (async () => {
-      try {
-        const tokenResponse = await login();
-        const productListResponse = await listProducts(tokenResponse.access_token);
-        const productList = productListResponse.data;
-        setProducts(productList);
-        console.log(productList);
-      } catch (error) {
-        console.error("Erro ao carregar os produtos:", error);
-      }
-    })();
+    fetchProducts();
   }, []);
 
   const columns = [
@@ -69,9 +74,9 @@ function ProductsPage() {
     },
   ];
 
-  const handleEdit = async (dados) => {
+  const handleEdit = async (id) => {
     try {
-      const productToEdit = products.find(product => product.id === dados);
+      const productToEdit = products.find(product => product.id === id);
       setEditProducts(productToEdit);
       setOpenModal(true);
       setIsEditing(true);
@@ -82,19 +87,37 @@ function ProductsPage() {
   };
 
   const handleDelete = async (id) => {
+    const confirmed = window.confirm("Você tem certeza que deseja deletar este produto?");
+    
+    if (!confirmed) {
+      return; 
+    }
     try {
       const tokenResponse = await login();
       await deleteProduct(tokenResponse.access_token, id);
       setProducts(products.filter(product => product.id !== id));
       console.log("Produto deletado com sucesso");
+      toast.success("Produto deletado com sucesso!");
     } catch (error) {
       console.error("Erro ao deletar o produto:", error);
+      toast.error("Erro ao deletar produto.");
     }
   };
 
+  const handleCloseModal = () => {
+    setOpenModal(false);
+    setIsEditing(false); // Reseta o edit do form 
+    setEditProducts(null); // Reseta o produto em edição
+    if (formRef.current) {
+      formRef.current.resetForm(); // Reseta o formulário por completo
+    }
+  };
+  
+
   return (
-    <section className="w-full h-screen bg-[#F4F6F8] flex justify-center items-center">
-      <div className="container md:w-[900px] w-[95%] h-[530px] md:mt-0 mt-20 py-5 mx-5 flex flex-col items-center bg-white rounded-md shadow-md">
+    <section className="w-full h-screen bg-white flex justify-center items-center">
+      <ToastContainer />
+      <div className="container md:w-[900px] w-[95%] h-[530px] md:mt-0 mt-20 py-5 mx-5 flex flex-col items-center bg-white rounded-md shadow-lg">
         <div className="relative w-full flex justify-center items-center mb-5">
           <h2 className="text-black text-2xl font-bold">Lista De Produtos</h2>
 
@@ -127,11 +150,11 @@ function ProductsPage() {
 
       {openModal && (
         <div className="fixed z-20 top-0 left-0 w-full h-full bg-gray-900 bg-opacity-50 flex justify-center items-center px-4">
-          <div className="bg-white p-8 rounded-md shadow-md mx-4 w-full max-w-[450px]">
+          <div className="bg-white p-8 rounded-md shadow-md mx-4 w-full max-w-[450px] md-mt-0 mt-20">
             <div className="flex justify-end">
               <Tooltip title="Close">
                 <button
-                  onClick={() => setOpenModal(false)}
+                  onClick={handleCloseModal}
                   className="hover:scale-105 transition-all duration-200"
                 >
                   <div className="w-3 h-3 bg-red-600 rounded-full "></div>
@@ -150,10 +173,16 @@ function ProductsPage() {
                 </button>
               </Tooltip>
             </div>
-            <div className="flex flex-col justify-center items-center mb-14 mt-5">
+            <div className="flex flex-col justify-center items-center mb-10 mt-5">
               <h2 className="text-black text-lg font-bold">Cadastro de Produtos</h2>
             </div>
-            <FormProducts isEditing={isEditing} editingProduct={editProducts} />
+            <FormProducts
+              ref={formRef}
+              isEditing={isEditing}
+              editingProduct={editProducts}
+              onCloseModal={handleCloseModal}
+              onProductCreated={fetchProducts}
+            />
           </div>
         </div>
       )}

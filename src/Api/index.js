@@ -66,18 +66,23 @@ export async function createProducts(token, dados) {
 }
 
 // Função de Editar Produtos
-export async function editProduct(token, dados) {
+export async function editProduct(token, id, data) {
   try {
-    const response = await axios(
+    const response = await axios.put(
+      'http://34.71.240.100/api/product/update',
       {
-        method: "PUT",
-        url: 'http://34.71.240.100/api/product/update',
+        id: id,
+        name: data.name,
+        description: data.description,
+        price: data.price,
+        status: data.status,
+        stock_quantity: data.stock_quantity,
+      },
+      {
         headers: {
           Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json'
         },
-        data: dados,
-        withCredentials: false,
       }
     );
     return response.data;
