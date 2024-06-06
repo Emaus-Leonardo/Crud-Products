@@ -151,7 +151,7 @@ const FormProducts = forwardRef(({ isEditing, editingProduct, onCloseModal, onPr
 
         <button
           type="submit"
-          className="bg-emerald-500 mt-3 rounded font-semibold text-white h-10 hover:bg-emerald-600"
+          className="bg-emerald-500 mt-3 rounded font-semibold text-white h-10 hover:bg-emerald-600 transition-all duration-300"
         >
           {isEditing ? "Atualizar" : "Cadastrar"}
         </button>
