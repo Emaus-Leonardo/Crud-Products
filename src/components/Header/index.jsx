@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import MobileMenu from "./mobileMenu"
 import "../../index.css";
 
 function Header() {
@@ -18,33 +19,31 @@ function Header() {
         <nav className="hidden xl:flex lg:flex gap-x-16 font-semibold cursor-pointer bg-[#F4F6F8] rounded-full p-2 w-[460px] h-[40px] items-center justify-center">
           <Link
             to="/"
-            className={`text-gray-700 hover:text-black hover:bg-white hover:shadow-md py-1 px-4 rounded-full transition-all duration-300 ${
-              linkPressionado === "/" ? "text-black bg-white shadow-md" : ""
-            }`}
+            className={`text-gray-700 hover:text-black hover:bg-white hover:shadow-md py-1 px-4 rounded-full transition-all duration-300 ${linkPressionado === "/" ? "text-black bg-white shadow-md" : ""
+              }`}
             onClick={() => handleLinkClick("/")}
           >
             Home
           </Link>
           <Link
             to="/products"
-            className={`text-gray-700 hover:text-black hover:bg-white hover:shadow-md py-1 px-4 rounded-full transition-all duration-300 ${
-              linkPressionado === "/products" ? "text-black bg-white shadow-md" : ""
-            }`}
+            className={`text-gray-700 hover:text-black hover:bg-white hover:shadow-md py-1 px-4 rounded-full transition-all duration-300 ${linkPressionado === "/products" ? "text-black bg-white shadow-md" : ""
+              }`}
             onClick={() => handleLinkClick("/products")}
           >
             Lista de Produtos
           </Link>
           <Link
             to="/about"
-            className={`text-gray-700 hover:text-black  hover:bg-white hover:shadow-md py-1 px-4 rounded-full transition-all duration-300 ${
-              linkPressionado === "/about" ? "text-black bg-white shadow-md" : ""
-            }`}
+            className={`text-gray-700 hover:text-black  hover:bg-white hover:shadow-md py-1 px-4 rounded-full transition-all duration-300 ${linkPressionado === "/about" ? "text-black bg-white shadow-md" : ""
+              }`}
             onClick={() => handleLinkClick("/about")}
           >
             Sobre
           </Link>
         </nav>
       </div>
+      <MobileMenu />
     </header>
   );
 }
