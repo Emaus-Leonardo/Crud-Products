@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { Tooltip } from "@mui/material";
-
-
+import { Pencil, Trash } from "@phosphor-icons/react";
+import { DataGrid } from "@mui/x-data-grid";
 import FormProducts from "../../FormProducts";
-import { login, listProducts } from '../../../Api/index';
+import { login, listProducts, deleteProduct } from '../../../Api/index';
 
 function ProductsPage() {
   const [openModal, setOpenModal] = useState(false);
   const [products, setProducts] = useState([]);
+  const [editProducts, setEditProducts] = useState(null);
+  const [isEditing, setIsEditing] = useState(false);
+  const [paginationModel, setPaginationModel] = useState({ pageSize: 6, page: 0 });
 
   const getStatusText = (status) => {
     switch (status) {
@@ -36,9 +39,62 @@ function ProductsPage() {
     })();
   }, []);
 
+  const columns = [
+    { field: 'name', headerName: 'Nome', width: 150 },
+    { field: 'description', headerName: 'Descrição', width: 200 },
+    { field: 'price', headerName: 'Preço', width: 110, renderCell: (params) => `R$${params.value.toFixed(2)}` },
+    { field: 'status', headerName: 'Status', width: 150, renderCell: (params) => getStatusText(params.value) },
+    { field: 'stock_quantity', headerName: 'Quantidade', width: 150 },
+    {
+      field: 'actions',
+      headerName: 'Ações',
+      width: 90,
+      sortable: false,
+      renderCell: (params) => (
+        <div className="flex py-4 gap-3">
+          <button
+            onClick={() => handleEdit(params.row.id)}
+            className="text-blue-500 hover:text-blue-700 focus:outline-none"
+          >
+            <Pencil size={20} />
+          </button>
+          <button
+            onClick={() => handleDelete(params.row.id)}
+            className="text-red-500 hover:text-red-700 focus:outline-none"
+          >
+            <Trash size={20} />
+          </button>
+        </div>
+      ),
+    },
+  ];
+
+  const handleEdit = async (dados) => {
+    try {
+      const productToEdit = products.find(product => product.id === dados);
+      setEditProducts(productToEdit);
+      setOpenModal(true);
+      setIsEditing(true);
+      console.log("Produto selecionado para edição:", productToEdit);
+    } catch (error) {
+      console.error("Erro ao editar o produto:", error);
+    }
+  };
+
+  const handleDelete = async (id) => {
+    try {
+      const tokenResponse = await login();
+      await deleteProduct(tokenResponse.access_token, id);
+      setProducts(products.filter(product => product.id !== id));
+      console.log("Produto deletado com sucesso");
+    } catch (error) {
+      console.error("Erro ao deletar o produto:", error);
+    }
+  };
+
   return (
     <section className="w-full h-screen bg-[#F4F6F8] flex justify-center items-center">
-      <div className="container md:w-[900px] w-[95%] h-[500px] py-5 mx-5 flex flex-col items-center bg-white rounded-md shadow-md">
+      <div className="container md:w-[900px] w-[95%] h-[530px] md:mt-0 mt-20 py-5 mx-5 flex flex-col items-center bg-white rounded-md shadow-md">
         <div className="relative w-full flex justify-center items-center mb-5">
           <h2 className="text-black text-2xl font-bold">Lista De Produtos</h2>
 
@@ -54,62 +110,23 @@ function ProductsPage() {
           <span className="lg:w-[800px] w-[95%] h-[1px] bg-gray-700 mb-8 "></span>
         </div>
 
-        <div className="w-full overflow-x-auto flex justify-center items-center px-2 ">
-          <table className="w-full bg-white md:ml-0 ml-16">
-            <thead>
-              <tr>
-                <th className="hidden py-2 px-4 border-b border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
-                  ID
-                </th>
-                <th className="py-2 px-4 border-b border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
-                  Nome
-                </th>
-                <th className="py-2 px-4 border-b border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
-                  Descrição
-                </th>
-                <th className="py-2 px-4 border-b border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
-                  Preço
-                </th>
-                <th className="py-2 px-4 border-b border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
-                  Status
-                </th>
-                <th className="py-2 px-4 border-b border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
-                  Quantidade
-                </th>
-              </tr>
-            </thead>
-
-            <tbody>
-              {Array.isArray(products) && products.slice(0, 8).map((product) => (
-                <tr key={product.id}>
-                  <td className="hidden  py-2 px-4 border-b border-gray-200">
-                    {product.id}
-                  </td>
-                  <td className="py-2 px-4 border-b border-gray-200">
-                    {product.name}
-                  </td>
-                  <td className="py-2 px-4 border-b border-gray-200">
-                    {product.description}
-                  </td>
-                  <td className="py-2 px-4 border-b border-gray-200">
-                    R${product.price.toFixed(2)}
-                  </td>
-                  <td className="py-2 px-4 border-b border-gray-200">
-                    {getStatusText(product.status)}
-                  </td>
-                  <td className="py-2 px-4 border-b border-gray-200">
-                    {product.stock_quantity}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-
-          </table>
+        <div className="w-full flex justify-center items-center px-2 ">
+          <div style={{ height: 400, width: '100%' }}>
+            <DataGrid
+              rows={products}
+              columns={columns}
+              pageSize={paginationModel.pageSize}
+              rowsPerPageOptions={[paginationModel.pageSize]}
+              paginationModel={paginationModel}
+              onPaginationModelChange={setPaginationModel}
+              pagination
+            />
+          </div>
         </div>
       </div>
 
       {openModal && (
-        <div className="fixed top-0 left-0 w-full h-full bg-gray-900 bg-opacity-50 flex justify-center items-center px-4">
+        <div className="fixed z-20 top-0 left-0 w-full h-full bg-gray-900 bg-opacity-50 flex justify-center items-center px-4">
           <div className="bg-white p-8 rounded-md shadow-md mx-4 w-full max-w-[450px]">
             <div className="flex justify-end">
               <Tooltip title="Close">
@@ -136,7 +153,7 @@ function ProductsPage() {
             <div className="flex flex-col justify-center items-center mb-14 mt-5">
               <h2 className="text-black text-lg font-bold">Cadastro de Produtos</h2>
             </div>
-            <FormProducts />
+            <FormProducts isEditing={isEditing} editingProduct={editProducts} />
           </div>
         </div>
       )}

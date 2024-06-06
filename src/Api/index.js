@@ -8,18 +8,18 @@ export async function login() {
   };
 
   const response = await axios.post(
-      'http://34.71.240.100/api/auth/login',
-      {
-        email: user.email,
-        password: user.password,
+    'http://34.71.240.100/api/auth/login',
+    {
+      email: user.email,
+      password: user.password,
+    },
+    {
+      headers: {
+        'Content-Type': 'application/json',
       },
-      {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        withCredentials: false,
-      }
-    )
+      withCredentials: false,
+    }
+  )
     .then((res) => res.data)
     .catch((err) => err);
   return response;
@@ -64,3 +64,45 @@ export async function createProducts(token, dados) {
     return error;
   }
 }
+
+// Função de Editar Produtos
+export async function editProduct(token, dados) {
+  try {
+    const response = await axios(
+      {
+        method: "PUT",
+        url: 'http://34.71.240.100/api/product/update',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        },
+        data: dados,
+        withCredentials: false,
+      }
+    );
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+}
+
+// Delete de produtos
+export async function deleteProduct(token, dados) {
+  try {
+    const response = await axios({
+      method: "DELETE",
+      url: `http://34.71.240.100/api/product/delete`,
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      },
+      data: { id: dados }, 
+      withCredentials: false,
+    });
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+}
+
+
