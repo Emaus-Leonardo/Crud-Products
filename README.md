@@ -17,3 +17,9 @@ Certifique-se de ter o Node.js instalado em seu sistema.
 
    ```bash
    npm install
+
+##Uso
+Para iniciar o servidor de desenvolvimento, execute o seguinte comando:
+
+   ```bash
+   npm run dev
