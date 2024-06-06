@@ -7,7 +7,7 @@ const MobileMenu = () => {
     const [openMenu, setOpenMenu] = useState(false);
 
     return (
-        <nav className="text-black font-primary xl:hidden lg:hidden">
+        <nav className="text-black w-10 h-10 flex justify-center items-center hover:bg-[#F5F5F5] transition-all duration-300 rounded-lg font-primary xl:hidden lg:hidden">
             <div
                 onClick={() => setOpenMenu(true)}
                 className="text-3xl cursor-pointer"
@@ -20,7 +20,7 @@ const MobileMenu = () => {
             >
                 <div
                     onClick={() => setOpenMenu(false)}
-                    className="text-4x1 absolute z-30 left-4 top-14 text-black cursor-pointer"
+                    className="text-4x1 w-10 h-10 flex justify-center items-center hover:bg-[#F5F5F5] transition-all duration-300 rounded-lg absolute z-30 left-4 top-14 text-black cursor-pointer"
                 >
                     <IoMdClose size={30} />
                 </div>
