@@ -88,9 +88,9 @@ function ProductsPage() {
 
   const handleDelete = async (id) => {
     const confirmed = window.confirm("Você tem certeza que deseja deletar este produto?");
-    
+
     if (!confirmed) {
-      return; 
+      return;
     }
     try {
       const tokenResponse = await login();
@@ -112,18 +112,22 @@ function ProductsPage() {
       formRef.current.resetForm(); // Reseta o formulário por completo
     }
   };
-  
+
 
   return (
     <section className="w-full h-screen bg-white flex justify-center items-center">
-      <ToastContainer />
-      <div className="container md:w-[900px] w-[95%] h-[530px] md:mt-0 mt-20 py-5 mx-5 flex flex-col items-center bg-white rounded-md shadow-lg">
+      <ToastContainer
+        position="bottom-left" 
+        toastStyle={{ backgroundColor: "#fff" }} 
+        bodyStyle={{ color: "#333" }}
+      />
+      <div className="container md:w-[900px] w-[95%] h-[530px] md:mt-0 mt-20 py-5 mx-5 flex flex-col items-center bg-white rounded-md shadow-custom">
         <div className="relative w-full flex justify-center items-center mb-5">
           <h2 className="text-black text-2xl font-bold">Lista De Produtos</h2>
 
           <button
             onClick={() => setOpenModal(true)}
-            className="absolute right-4 md:right-12 bg-transparent border-solid border-[1px] border-[#A8D5BA] text-[#A8D5BA] hover:bg-[#A8D5BA] hover:text-white transition-all duration-300 px-3 py-1 rounded-lg">
+            className="absolute right-4 md:right-12 bg-transparent border-solid border-[1px] border-emerald-500 text-emerald-500 hover:bg-emerald-500 hover:text-white transition-all duration-300 px-3 py-1 rounded-lg">
             <span className="block md:hidden text-[18px]">+</span>
             <span className="hidden md:block">+ Adicionar</span>
           </button>
