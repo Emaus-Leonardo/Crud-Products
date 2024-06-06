@@ -1,6 +1,6 @@
 # CRUD de Produtos
 
-Este é um projeto de CRUD (Create, Read, Update, Delete) de produtos desenvolvido com Vite e React.js. Ele utiliza várias bibliotecas para facilitar o desenvolvimento, incluindo toast, Zod, react-hook-forms, MUI (Material-UI) com o motor de estilos MUI-Styles-Engine, tooltips, Phosphor Icons, react-router-dom, mui-datagrid, axios e Tailwind CSS com Prettier.
+Este é um projeto de CRUD (Create, Read, Update, Delete) de produtos desenvolvido com Vite e React.js. Ele utiliza várias bibliotecas para facilitar o desenvolvimento, incluindo toast, Zod, react-hook-forms, MUI (Material-UI) etc...
 
 ## Pré-requisitos
 
