@@ -1,4 +1,4 @@
-# CRUD de Produtos
+# Teste Tecnico Para BeviCred Product CRUD 
 
 Este é um projeto de CRUD (Create, Read, Update, Delete) de produtos desenvolvido com Vite e React.js. Ele utiliza várias bibliotecas para facilitar o desenvolvimento, incluindo toast, Zod, react-hook-forms, MUI (Material-UI) etc...
 
