@@ -1,9 +1,11 @@
-import React, { useState, useEffect, useRef, useImperativeHandle, forwardRef } from "react";
+import React, { useState, useEffect, useImperativeHandle, forwardRef } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { toast } from "react-toastify";
+
 import { login, createProducts, editProduct } from "../../Api";
+
 
 const productSchema = z.object({
   id: z.number().min(0, { message: "Nome é obrigatório" }),
@@ -34,6 +36,7 @@ const FormProducts = forwardRef(({ isEditing, editingProduct, onCloseModal, onPr
     },
   });
 
+
   useEffect(() => {
     if (isEditing && editingProduct) {
       reset(editingProduct);
@@ -42,6 +45,7 @@ const FormProducts = forwardRef(({ isEditing, editingProduct, onCloseModal, onPr
       setEditMode(false);
     }
   }, [isEditing, editingProduct, reset]);
+
 
   const onSubmit = async (data) => {
     try {
@@ -72,7 +76,8 @@ const FormProducts = forwardRef(({ isEditing, editingProduct, onCloseModal, onPr
   useImperativeHandle(ref, () => ({
     resetForm: () => reset()
   }));
-''
+
+
   return (
     <main className="flex justify-center items-center">
       <form
@@ -84,7 +89,8 @@ const FormProducts = forwardRef(({ isEditing, editingProduct, onCloseModal, onPr
           <input
             className="h-8 w-full outline-none bg-[#F5F5F5] rounded px-2 shadow-2xl"
             placeholder="digite o nome do produto"
-            type="number" {...register("id", { valueAsNumber: true })} />
+            type="number" 
+            {...register("id", { valueAsNumber: true })} />
           {errors.id && (
             <span className="text-red-500">{errors.id.message}</span>
           )}
@@ -95,7 +101,8 @@ const FormProducts = forwardRef(({ isEditing, editingProduct, onCloseModal, onPr
           <input
             className="h-8 w-full outline-none bg-[#F5F5F5] rounded px-2 shadow-2xl"
             placeholder="digite o nome do produto"
-            type="text" {...register("name")} />
+            type="text" 
+            {...register("name")} />
           {errors.name && (
             <span className="text-red-500">{errors.name.message}</span>
           )}
@@ -106,7 +113,8 @@ const FormProducts = forwardRef(({ isEditing, editingProduct, onCloseModal, onPr
           <input
             className="h-8 w-full outline-none bg-[#F5F5F5] rounded px-2 shadow-2xl"
             placeholder="digite a descrição do produto "
-            type="text" {...register("description")} />
+            type="text" 
+            {...register("description")} />
           {errors.description && (
             <span className="text-red-500">{errors.description.message}</span>
           )}
@@ -117,7 +125,8 @@ const FormProducts = forwardRef(({ isEditing, editingProduct, onCloseModal, onPr
           <input
             className="h-8 w-full outline-none bg-[#F5F5F5] rounded px-2 shadow-2xl"
             placeholder="digite um preço"
-            type="number" {...register("price", { valueAsNumber: true })} />
+            type="number" 
+            {...register("price", { valueAsNumber: true })} />
           {errors.price && (
             <span className="text-red-500">{errors.price.message}</span>
           )}
@@ -127,7 +136,8 @@ const FormProducts = forwardRef(({ isEditing, editingProduct, onCloseModal, onPr
           <div className="flex flex-col gap-1">
             <label htmlFor="status">Status</label>
             <select
-              className="h-8 w-full outline-none bg-[#F5F5F5] rounded px-2 shadow-2xl" {...register("status", { valueAsNumber: true })}>
+              className="h-8 w-full outline-none bg-[#F5F5F5] rounded px-2 shadow-2xl" 
+              {...register("status", { valueAsNumber: true })}>
               <option value={1}>Em Estoque</option>
               <option value={2}>Em Reposição</option>
               <option value={3}>Em Falta</option>
@@ -143,7 +153,8 @@ const FormProducts = forwardRef(({ isEditing, editingProduct, onCloseModal, onPr
           <input
             className="h-8 w-full outline-none bg-[#F5F5F5] rounded px-2 shadow-2xl"
             placeholder="digite a quantidade"
-            type="number" {...register("stock_quantity", { valueAsNumber: true })} />
+            type="number" 
+            {...register("stock_quantity", { valueAsNumber: true })} />
           {errors.stock_quantity && (
             <span className="text-red-500">{errors.stock_quantity.message}</span>
           )}
