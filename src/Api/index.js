@@ -22,6 +22,7 @@ export async function login() {
   )
     .then((res) => res.data)
     .catch((err) => err);
+    console.error('Erro ao fazer login:', error);
   return response;
 }
 
@@ -40,6 +41,7 @@ export async function listProducts(token) {
     );
     return response.data;
   } catch (error) {
+    console.error('Erro ao listar produtos:', error);
     return error;
   }
 }
@@ -56,11 +58,11 @@ export async function createProducts(token, dados) {
           'Content-Type': 'application/json'
         },
         data: dados,
-        withCredentials: false,
       }
     );
     return response.data;
   } catch (error) {
+    console.error('Erro ao criar produto:', error);
     return error;
   }
 }
@@ -70,14 +72,7 @@ export async function editProduct(token, id, data) {
   try {
     const response = await axios.put(
       'http://34.71.240.100/api/product/update',
-      {
-        id: id,
-        name: data.name,
-        description: data.description,
-        price: data.price,
-        status: data.status,
-        stock_quantity: data.stock_quantity,
-      },
+      { id, ...data },
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -87,12 +82,13 @@ export async function editProduct(token, id, data) {
     );
     return response.data;
   } catch (error) {
+    console.error('Erro ao editar produto:', error);
     return error;
   }
 }
 
 // Delete de produtos
-export async function deleteProduct(token, dados) {
+export async function deleteProduct(token, id) {
   try {
     const response = await axios({
       method: "DELETE",
@@ -101,11 +97,11 @@ export async function deleteProduct(token, dados) {
         Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json'
       },
-      data: { id: dados }, 
-      withCredentials: false,
+      data: { id }, 
     });
     return response.data;
   } catch (error) {
+    console.error('Erro ao deletar produto:', error);
     return error;
   }
 }
