@@ -45,7 +45,7 @@ function ProductsPage() {
     fetchProducts();
   }, []);
 
-  
+
   // função de edição do produto
   const handleEdit = async (id) => {
     try {
@@ -53,7 +53,7 @@ function ProductsPage() {
       setEditProducts(productToEdit);
       setOpenModal(true);
       setIsEditing(true);
-      } catch (error) {
+    } catch (error) {
       console.error("Erro ao editar o produto:", error);
     }
   };
