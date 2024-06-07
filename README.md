@@ -45,8 +45,7 @@ Para iniciar o servidor de desenvolvimento, execute o seguinte comando:
    ```bash
    npm run dev
    ```
-
-3. Rode os testes:
+## Para Rodar os testes:
    
     ```sh
     npm run test
