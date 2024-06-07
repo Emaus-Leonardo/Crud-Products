@@ -33,7 +33,7 @@ Certifique-se de ter o Node.js instalado em seu sistema.
    ```bash
    git clone https://github.com/Emaus-Leonardo/Crud-Products
 
-2. **Instale as depêndencias
+2. Instale as depêndencias
 
    ```bash
    npm install
@@ -47,7 +47,7 @@ Para iniciar o servidor de desenvolvimento, execute o seguinte comando:
    ```
 ## Para Rodar os testes:
    
-    ```sh
+    ```bash
     npm run test
     # ou
     yarn test
