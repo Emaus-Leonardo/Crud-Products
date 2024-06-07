@@ -47,8 +47,9 @@ Para iniciar o servidor de desenvolvimento, execute o seguinte comando:
    ```
 ## Para Rodar os testes:
    
-    ```bash
     npm run test
-    # ou
+    
+    ou
+    
     yarn test
-    ```
+
