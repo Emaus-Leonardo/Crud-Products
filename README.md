@@ -4,19 +4,19 @@ Este projeto é uma aplicação de CRUD (Create, Read, Update, Delete) de produt
 
 ## Funcionalidades
 
-Listagem de Produtos: Exibe uma lista de produtos cadastrados, com informações detalhadas sobre cada produto.
-Cadastro de Produtos: Permite adicionar novos produtos com nome, descrição, preço, status e quantidade em estoque.
-Edição de Produtos: Possibilita a edição das informações de produtos já cadastrados.
-Exclusão de Produtos: Permite deletar produtos, removendo-os da lista.
+- **Listagem de Produtos**: Exibe uma lista de produtos cadastrados, com informações detalhadas sobre cada produto.
+- **Cadastro de Produtos**: Permite adicionar novos produtos com nome, descrição, preço, status e quantidade em estoque.
+- **Edição de Produtos**: Possibilita a edição das informações de produtos já cadastrados.
+- **Exclusão de Produtos**: Permite deletar produtos, removendo-os da lista.
 
 ## Tecnologias Utilizadas
 
-React.js: Biblioteca JavaScript para construção de interfaces de usuário.
-Vite: Ferramenta de construção rápida de projetos front-end.
-Toast: Biblioteca para exibição de notificações de feedback ao usuário.
-Zod: Biblioteca para validação de esquemas de dados.
-React Hook Form: Biblioteca para gerenciar formulários em React.
-Material-UI (MUI): Biblioteca de componentes React para design de interface.
+- **React.js**: Biblioteca JavaScript para construção de interfaces de usuário.
+- **Vite**: Ferramenta de construção rápida de projetos front-end.
+- **Toast**: Biblioteca para exibição de notificações de feedback ao usuário.
+- **Zod**: Biblioteca para validação de esquemas de dados.
+- **React Hook Form**: Biblioteca para gerenciar formulários em React.
+- **Material-UI (MUI)**: Biblioteca de componentes React para design de interface.
 
 ## Autenticação e Autorização
 
@@ -44,3 +44,12 @@ Para iniciar o servidor de desenvolvimento, execute o seguinte comando:
 
    ```bash
    npm run dev
+   ```
+
+3. Rode os testes:
+   
+    ```sh
+    npm run test
+    # ou
+    yarn test
+    ```
