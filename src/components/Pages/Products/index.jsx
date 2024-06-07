@@ -120,8 +120,8 @@ function ProductsPage() {
   return (
     <section className="w-full h-screen bg-[#F4F6F8] flex justify-center items-center">
       <ToastContainer
-        position="bottom-left" 
-        toastStyle={{ backgroundColor: "#fff" }} 
+        position="bottom-left"
+        toastStyle={{ backgroundColor: "#fff" }}
         bodyStyle={{ color: "#333" }}
       />
       <div className="container md:w-[900px] w-[95%] h-[530px] md:mt-0 mt-20 py-5 mx-5 flex flex-col items-center bg-white rounded-md shadow-custom">
