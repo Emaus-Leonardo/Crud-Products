@@ -28,12 +28,13 @@ function ProductsPage() {
     }
   };
 
+  // ffunção que faz a listagem de produtos 
   const fetchProducts = async () => {
     try {
-      const tokenResponse = await login();
+      const tokenResponse = await login(); //aonde o login é feito e o token é reotnado
       const productListResponse = await listProducts(tokenResponse.access_token);
       const productList = productListResponse.data;
-      setProducts(productList);
+      setProducts(productList); //aqui é onde acoore a atualização da lista 
       console.log(productList);
     } catch (error) {
       console.error("Erro ao carregar os produtos:", error);
@@ -74,6 +75,7 @@ function ProductsPage() {
     },
   ];
 
+  // função de edição do produto
   const handleEdit = async (id) => {
     try {
       const productToEdit = products.find(product => product.id === id);
@@ -86,6 +88,7 @@ function ProductsPage() {
     }
   };
 
+  // função que deleta o produto
   const handleDelete = async (id) => {
     const confirmed = window.confirm("Você tem certeza que deseja deletar este produto?");
 
@@ -95,7 +98,7 @@ function ProductsPage() {
     try {
       const tokenResponse = await login();
       await deleteProduct(tokenResponse.access_token, id);
-      setProducts(products.filter(product => product.id !== id));
+      setProducts(products.filter(product => product.id !== id)); //atualiza a lista assim que o produto é deletado 
       console.log("Produto deletado com sucesso");
       toast.success("Produto deletado com sucesso!");
     } catch (error) {
@@ -182,10 +185,10 @@ function ProductsPage() {
             </div>
             <FormProducts
               ref={formRef}
-              isEditing={isEditing}
-              editingProduct={editProducts}
+              isEditing={isEditing} //passa se esta em edição
+              editingProduct={editProducts} //passa o produto para edição 
               onCloseModal={handleCloseModal}
-              onProductCreated={fetchProducts}
+              onProductCreated={fetchProducts} //função que busca o produto ao criar ou editar 
             />
           </div>
         </div>
