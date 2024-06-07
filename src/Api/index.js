@@ -22,7 +22,6 @@ export async function login() {
   )
     .then((res) => res.data)
     .catch((err) => err);
-    console.error('Erro ao fazer login:', error);
   return response;
 }
 
@@ -42,7 +41,7 @@ export async function listProducts(token) {
     return response.data;
   } catch (error) {
     console.error('Erro ao listar produtos:', error);
-    return error;
+    throw error;
   }
 }
 
@@ -63,7 +62,7 @@ export async function createProducts(token, dados) {
     return response.data;
   } catch (error) {
     console.error('Erro ao criar produto:', error);
-    return error;
+    throw error;
   }
 }
 
@@ -83,7 +82,7 @@ export async function editProduct(token, id, data) {
     return response.data;
   } catch (error) {
     console.error('Erro ao editar produto:', error);
-    return error;
+    throw error;
   }
 }
 
@@ -102,7 +101,7 @@ export async function deleteProduct(token, id) {
     return response.data;
   } catch (error) {
     console.error('Erro ao deletar produto:', error);
-    return error;
+    throw error;
   }
 }
 
