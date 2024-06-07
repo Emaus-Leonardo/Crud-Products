@@ -72,14 +72,14 @@ const FormProducts = forwardRef(({ isEditing, editingProduct, onCloseModal, onPr
   useImperativeHandle(ref, () => ({
     resetForm: () => reset()
   }));
-
+''
   return (
     <main className="flex justify-center items-center">
       <form
         className="flex flex-col gap-5 w-[400px]"
         onSubmit={handleSubmit(onSubmit)}
       >
-        <div className="hidden flex flex-col gap-1">
+        <div className="hidden flex-col gap-1">
           <label htmlFor="name">Id</label>
           <input
             className="h-8 w-full outline-none bg-[#F5F5F5] rounded px-2 shadow-2xl"
