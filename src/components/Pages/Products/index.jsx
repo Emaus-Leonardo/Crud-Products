@@ -1,10 +1,13 @@
 import React, { useState, useEffect, useRef } from "react";
+
 import { Tooltip } from "@mui/material";
 import { Pencil, Trash } from "@phosphor-icons/react";
 import { DataGrid } from "@mui/x-data-grid";
-import FormProducts from "../../FormProducts";
+
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+
+import FormProducts from "../../FormProducts";
 import { login, listProducts, deleteProduct } from '../../../Api/index';
 
 function ProductsPage() {
@@ -15,35 +18,69 @@ function ProductsPage() {
   const [paginationModel, setPaginationModel] = useState({ pageSize: 6, page: 0 });
   const formRef = useRef();
 
+
   const getStatusText = (status) => {
     switch (status) {
-      case 1:
-        return "Em Estoque";
-      case 2:
-        return "Em Reposição";
-      case 3:
-        return "Em Falta";
-      default:
-        return "";
+      case 1: return "Em Estoque";
+      case 2: return "Em Reposição";
+      case 3: return "Em Falta";
+      default: return "";
     }
   };
+
 
   // ffunção que faz a listagem de produtos 
   const fetchProducts = async () => {
     try {
       const tokenResponse = await login(); //aonde o login é feito e o token é reotnado
       const productListResponse = await listProducts(tokenResponse.access_token);
-      const productList = productListResponse.data;
-      setProducts(productList); //aqui é onde acoore a atualização da lista 
-      console.log(productList);
+      setProducts(productListResponse.data); //aqui é onde acoore a atualização da lista 
     } catch (error) {
       console.error("Erro ao carregar os produtos:", error);
     }
   };
 
+
   useEffect(() => {
     fetchProducts();
   }, []);
+
+  
+  // função de edição do produto
+  const handleEdit = async (id) => {
+    try {
+      const productToEdit = products.find(product => product.id === id);
+      setEditProducts(productToEdit);
+      setOpenModal(true);
+      setIsEditing(true);
+      } catch (error) {
+      console.error("Erro ao editar o produto:", error);
+    }
+  };
+
+  // função que deleta o produto
+  const handleDelete = async (id) => {
+    if (window.confirm("Você tem certeza que deseja deletar este produto?")) {
+      try {
+        const tokenResponse = await login();
+        await deleteProduct(tokenResponse.access_token, id);
+        setProducts(products.filter(product => product.id !== id));
+        toast.success("Produto deletado com sucesso!");
+      } catch (error) {
+        console.error("Erro ao deletar o produto:", error);
+        toast.error("Erro ao deletar produto.");
+      }
+    }
+  };
+
+
+  const handleCloseModal = () => {
+    setOpenModal(false);
+    setIsEditing(false); // Reseta o edit do form 
+    setEditProducts(null); // Reseta o produto em edição
+    formRef.current?.resetForm(); // Reseta o formulário por completo
+  };
+
 
   const columns = [
     { field: 'name', headerName: 'Nome', width: 150 },
@@ -74,48 +111,6 @@ function ProductsPage() {
       ),
     },
   ];
-
-  // função de edição do produto
-  const handleEdit = async (id) => {
-    try {
-      const productToEdit = products.find(product => product.id === id);
-      setEditProducts(productToEdit);
-      setOpenModal(true);
-      setIsEditing(true);
-      console.log("Produto selecionado para edição:", productToEdit);
-    } catch (error) {
-      console.error("Erro ao editar o produto:", error);
-    }
-  };
-
-  // função que deleta o produto
-  const handleDelete = async (id) => {
-    const confirmed = window.confirm("Você tem certeza que deseja deletar este produto?");
-
-    if (!confirmed) {
-      return;
-    }
-    try {
-      const tokenResponse = await login();
-      await deleteProduct(tokenResponse.access_token, id);
-      setProducts(products.filter(product => product.id !== id)); //atualiza a lista assim que o produto é deletado 
-      console.log("Produto deletado com sucesso");
-      toast.success("Produto deletado com sucesso!");
-    } catch (error) {
-      console.error("Erro ao deletar o produto:", error);
-      toast.error("Erro ao deletar produto.");
-    }
-  };
-
-  const handleCloseModal = () => {
-    setOpenModal(false);
-    setIsEditing(false); // Reseta o edit do form 
-    setEditProducts(null); // Reseta o produto em edição
-    if (formRef.current) {
-      formRef.current.resetForm(); // Reseta o formulário por completo
-    }
-  };
-
 
   return (
     <section className="w-full h-screen bg-[#F4F6F8] flex justify-center items-center">
