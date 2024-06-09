@@ -22,6 +22,44 @@ Este projeto é uma aplicação de CRUD (Create, Read, Update, Delete) de produt
 
 A aplicação realiza autenticação através de uma API de login, que retorna um token de acesso. Este token é utilizado nas requisições subsequentes para garantir que apenas usuários autenticados possam acessar e manipular os dados dos produtos.
 
+## Estrutura do Projeto
+
+   ```bash
+CRUD-PROJECT/
+├── jest/
+├── node_modules/
+├── public/
+├── src/
+│   ├── Api/
+│   │   ├── test/
+│   │   └── index.js
+│   ├── components/
+│   │   ├── FormProducts/
+│   │   │   └── index.jsx
+│   │   └── Header/
+│   │       ├── index.jsx
+│   │       └── mobileMenu.jsx
+│   ├── Pages/
+│   │   ├── About/
+│   │   ├── Home/
+│   │   └── Products/
+│   ├── App.jsx
+│   ├── index.css
+│   ├── main.jsx
+├── .eslintrc.cjs
+├── .gitignore
+├── babel.config.json
+├── index.html
+├── jest.config.cjs
+├── package-lock.json
+├── package.json
+├── postcss.config.js
+├── prettier.config.js
+├── README.md
+├── tailwind.config.js
+└── vite.config.js
+```
+
 ## Pré-requisitos
 
 Certifique-se de ter o Node.js instalado em seu sistema.
