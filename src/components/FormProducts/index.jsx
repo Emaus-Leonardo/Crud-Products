@@ -11,8 +11,8 @@ const productSchema = z.object({
   id: z.number().min(0, { message: "Nome é obrigatório" }),
   name: z.string().nonempty("Nome é obrigatório"),
   description: z.string().nonempty("Descrição é obrigatória"),
-  price: z.number().min(0, { message: "O preço deve ser maior ou igual a 0" }),
-  status: z.number().min(0, "O status deve ser maior ou igual a 0"),
+  price: z.number().min(0, { message: "Preço é obrigatorio" }),
+  status: z.number().min(0, "status é obrigatorio"),
   stock_quantity: z.number().min(0, { message: "A quantidade em estoque deve ser maior ou igual a 0" }),
 });
 

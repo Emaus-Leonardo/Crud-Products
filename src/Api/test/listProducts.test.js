@@ -1,4 +1,3 @@
-import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import ProductsPage from '../../components/Pages/Products';
 import { login, listProducts } from '../index';

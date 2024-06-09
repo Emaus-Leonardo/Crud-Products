@@ -1,4 +1,3 @@
-import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import FormProducts from '../../components/FormProducts';
 import { login, createProducts, editProduct } from '../index';

@@ -132,6 +132,7 @@ function ProductsPage() {
           <h2 className="text-black text-2xl font-bold">Lista De Produtos</h2>
 
           <button
+            data-testid="+ Adcionar"
             onClick={() => setOpenModal(true)}
             className="absolute right-4 md:right-12 bg-transparent border-solid border-[1px] border-emerald-500 text-emerald-500 hover:bg-emerald-500 hover:text-white transition-all duration-300 px-3 py-1 rounded-lg">
             <span className="block md:hidden text-[18px]">+</span>
@@ -180,6 +181,7 @@ function ProductsPage() {
 
               <div
                 onClick={handleCloseModal}
+                data-testid={`close-button`}  
                 className="flex justify-center items-center cursor-pointer hover:bg-[#F5F5F5] transition-all duration-300 rounded-lg"
               >
                 <IoMdClose size={30} />
