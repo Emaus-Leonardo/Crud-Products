@@ -13,10 +13,8 @@ Este projeto é uma aplicação de CRUD (Create, Read, Update, Delete) de produt
 
 - **React.js**: Biblioteca JavaScript para construção de interfaces de usuário.
 - **Vite**: Ferramenta de construção rápida de projetos front-end.
-- **Toast**: Biblioteca para exibição de notificações de feedback ao usuário.
 - **Zod**: Biblioteca para validação de esquemas de dados.
 - **React Hook Form**: Biblioteca para gerenciar formulários em React.
-- **Material-UI (MUI)**: Biblioteca de componentes React para design de interface.
 
 ## Autenticação e Autorização
 
