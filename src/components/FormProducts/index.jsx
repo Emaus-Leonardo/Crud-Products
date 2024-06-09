@@ -52,7 +52,7 @@ const FormProducts = forwardRef(({ isEditing, editingProduct, onCloseModal, onPr
       const tokenResponse = await login();
       if (isEditing) {
         const confirmed = window.confirm("Tem certeza que deseja atualizar este produto?");
-        if (!confirmed) return; // Se clicado em cancelar, sai da função
+        if (!confirmed) return; 
 
         // Se estiver em modo de edição, a função editProduct é chamada
         const result = await editProduct(tokenResponse.access_token, editingProduct.id, data);
@@ -81,12 +81,14 @@ const FormProducts = forwardRef(({ isEditing, editingProduct, onCloseModal, onPr
   return (
     <main className="flex justify-center items-center">
       <form
+        role="form"
         className="flex flex-col gap-5 w-[400px]"
         onSubmit={handleSubmit(onSubmit)}
       >
         <div className="hidden flex-col gap-1">
           <label htmlFor="name">Id</label>
           <input
+            id="id"
             className="h-8 w-full outline-none bg-[#F5F5F5] rounded px-2 shadow-2xl"
             placeholder="digite o nome do produto"
             type="number" 
@@ -99,6 +101,7 @@ const FormProducts = forwardRef(({ isEditing, editingProduct, onCloseModal, onPr
         <div className="flex flex-col gap-1">
           <label htmlFor="name">Nome</label>
           <input
+            id="name"
             className="h-8 w-full outline-none bg-[#F5F5F5] rounded px-2 shadow-2xl"
             placeholder="digite o nome do produto"
             type="text" 
@@ -111,6 +114,7 @@ const FormProducts = forwardRef(({ isEditing, editingProduct, onCloseModal, onPr
         <div className="flex flex-col gap-1">
           <label htmlFor="description">Descrição</label>
           <input
+            id="description"
             className="h-8 w-full outline-none bg-[#F5F5F5] rounded px-2 shadow-2xl"
             placeholder="digite a descrição do produto "
             type="text" 
@@ -123,6 +127,7 @@ const FormProducts = forwardRef(({ isEditing, editingProduct, onCloseModal, onPr
         <div className="flex flex-col gap-1">
           <label htmlFor="price">Preço</label>
           <input
+            id="price"
             className="h-8 w-full outline-none bg-[#F5F5F5] rounded px-2 shadow-2xl"
             placeholder="digite um preço"
             type="number" 
@@ -136,6 +141,7 @@ const FormProducts = forwardRef(({ isEditing, editingProduct, onCloseModal, onPr
           <div className="flex flex-col gap-1">
             <label htmlFor="status">Status</label>
             <select
+              id="status"
               className="h-8 w-full outline-none bg-[#F5F5F5] rounded px-2 shadow-2xl" 
               {...register("status", { valueAsNumber: true })}>
               <option value={1}>Em Estoque</option>
@@ -151,6 +157,7 @@ const FormProducts = forwardRef(({ isEditing, editingProduct, onCloseModal, onPr
         <div className="flex flex-col gap-1">
           <label htmlFor="stock_quantity">Quantidade em Estoque</label>
           <input
+            id="stock_quantity"
             className="h-8 w-full outline-none bg-[#F5F5F5] rounded px-2 shadow-2xl"
             placeholder="digite a quantidade"
             type="number" 
@@ -162,7 +169,7 @@ const FormProducts = forwardRef(({ isEditing, editingProduct, onCloseModal, onPr
 
         <button
           type="submit"
-          className="bg-emerald-500 mt-3 rounded font-semibold text-white h-10 hover:bg-emerald-600 transition-all duration-300"
+          className="bg-transparent border-solid border-[1px] border-emerald-500 text-emerald-500 hover:bg-emerald-500 hover:text-white transition-all duration-500 px-3 py-2 mt-5 rounded-lg"
         >
           {isEditing ? "Atualizar" : "Cadastrar"}
         </button>

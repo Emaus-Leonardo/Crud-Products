@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 
-import { Tooltip } from "@mui/material";
+import { IoMdClose } from "react-icons/io";
 import { Pencil, Trash } from "@phosphor-icons/react";
 import { DataGrid } from "@mui/x-data-grid";
 
@@ -16,6 +16,7 @@ function ProductsPage() {
   const [editProducts, setEditProducts] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
   const [paginationModel, setPaginationModel] = useState({ pageSize: 6, page: 0 });
+  const [loading, setLoading] = useState(true);
   const formRef = useRef();
 
 
@@ -32,11 +33,14 @@ function ProductsPage() {
   // ffunção que faz a listagem de produtos 
   const fetchProducts = async () => {
     try {
-      const tokenResponse = await login(); //aonde o login é feito e o token é reotnado
+      const tokenResponse = await login();
       const productListResponse = await listProducts(tokenResponse.access_token);
-      setProducts(productListResponse.data); //aqui é onde acoore a atualização da lista 
+      setProducts(productListResponse.data);
+      setLoading(false);
     } catch (error) {
       console.error("Erro ao carregar os produtos:", error);
+      setError("Erro ao carregar os produtos. Por favor, tente novamente mais tarde.");
+      setLoading(false);
     }
   };
 
@@ -57,6 +61,7 @@ function ProductsPage() {
       console.error("Erro ao editar o produto:", error);
     }
   };
+
 
   // função que deleta o produto
   const handleDelete = async (id) => {
@@ -98,15 +103,18 @@ function ProductsPage() {
           <button
             onClick={() => handleEdit(params.row.id)}
             className="text-blue-500 hover:text-blue-700 focus:outline-none"
+            data-testid={`product-${params.row.id}-edit-button`}
           >
             <Pencil size={20} />
           </button>
+
           <button
             onClick={() => handleDelete(params.row.id)}
             className="text-red-500 hover:text-red-700 focus:outline-none"
-          >
+            data-testid={`product-delete-button-${params.row.id}`}          >
             <Trash size={20} />
           </button>
+
         </div>
       ),
     },
@@ -137,15 +145,28 @@ function ProductsPage() {
 
         <div className="w-full flex justify-center items-center px-2 ">
           <div style={{ height: 400, width: '100%' }}>
-            <DataGrid
-              rows={products}
-              columns={columns}
-              pageSize={paginationModel.pageSize}
-              rowsPerPageOptions={[paginationModel.pageSize]}
-              paginationModel={paginationModel}
-              onPaginationModelChange={setPaginationModel}
-              pagination
-            />
+            {loading ? (
+              <div className="animate-pulse">
+                <div className="h-10 bg-gray-200 rounded mb-2"></div>
+                <div className="h-10 bg-gray-200 rounded mb-2"></div>
+                <div className="h-10 bg-gray-200 rounded mb-2"></div>
+                <div className="h-10 bg-gray-200 rounded mb-2"></div>
+                <div className="h-10 bg-gray-200 rounded mb-2"></div>
+                <div className="h-10 bg-gray-200 rounded mb-2"></div>
+                <div className="h-10 bg-gray-200 rounded mb-2"></div>
+                <div className="h-10 bg-gray-200 rounded mb-2"></div>
+              </div>
+            ) : (
+              <DataGrid
+                rows={products}
+                columns={columns}
+                pageSize={paginationModel.pageSize}
+                rowsPerPageOptions={[paginationModel.pageSize]}
+                paginationModel={paginationModel}
+                onPaginationModelChange={setPaginationModel}
+                pagination
+              />
+            )}
           </div>
         </div>
       </div>
@@ -153,31 +174,18 @@ function ProductsPage() {
       {openModal && (
         <div className="fixed z-20 top-0 left-0 w-full h-full bg-gray-900 bg-opacity-50 flex justify-center items-center px-4">
           <div className="bg-white p-8 rounded-md shadow-md mx-4 w-full max-w-[450px] md-mt-0 mt-20">
-            <div className="flex justify-end">
-              <Tooltip title="Close">
-                <button
-                  onClick={handleCloseModal}
-                  className="hover:scale-105 transition-all duration-200"
-                >
-                  <div className="w-3 h-3 bg-red-600 rounded-full "></div>
-                </button>
-              </Tooltip>
 
-              <Tooltip title="Minimize">
-                <button className="hover:scale-105 transition-all duration-200">
-                  <div className="w-3 h-3 bg-yellow-300 rounded-full ml-2"></div>
-                </button>
-              </Tooltip>
-
-              <Tooltip title="Maximize">
-                <button className="hover:scale-105 transition-all duration-200">
-                  <div className="w-3 h-3 bg-green-500 rounded-full ml-2"></div>
-                </button>
-              </Tooltip>
-            </div>
-            <div className="flex flex-col justify-center items-center mb-10 mt-5">
+            <div className="flex justify-between items-center w-full mb-10">
               <h2 className="text-black text-lg font-bold">Cadastro de Produtos</h2>
+
+              <div
+                onClick={handleCloseModal}
+                className="flex justify-center items-center cursor-pointer hover:bg-[#F5F5F5] transition-all duration-300 rounded-lg"
+              >
+                <IoMdClose size={30} />
+              </div>
             </div>
+
             <FormProducts
               ref={formRef}
               isEditing={isEditing} //passa se esta em edição
