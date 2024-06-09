@@ -56,5 +56,6 @@ Para iniciar o servidor de desenvolvimento, execute o seguinte comando:
    ```bash
    yarn test
    ```
+Além disso, você pode usar a extensão "Jest Runner" do VS Code para facilitar a execução e a depuração dos testes diretamente no editor. 
 
 ## Conclusão
