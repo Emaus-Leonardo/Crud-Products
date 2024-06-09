@@ -100,6 +100,39 @@ Além disso, você pode usar a extensão "Jest Runner" do VS Code para facilitar
 
 Este projeto inclui uma série de testes para garantir que as principais funcionalidades estejam funcionando corretamente. A seguir, um resumo dos testes implementados.
 
+## Login
+
+**Objetivo:**  
+Verificar se a funcionalidade de login funciona corretamente.
+
+- **Setup:**  
+  Renderizar o componente de login.
+
+- **Testar login com credenciais válidas:**
+  - Preencher o formulário de login com credenciais válidas.
+  - Submeter o formulário.
+  - Verificar se o usuário foi redirecionado para a página correta.
+
+- **Testar login com credenciais inválidas:**
+  - Preencher o formulário de login com credenciais inválidas.
+  - Submeter o formulário.
+  - Verificar se a mensagem de erro apropriada é exibida.
+
+## ListProducts
+
+**Objetivo:**  
+Verificar se a lista de produtos é exibida corretamente e se a busca/filtragem funciona.
+
+- **Setup:**  
+  Renderizar o componente de lista de produtos.
+
+- **Testar exibição de produtos:**
+  - Verificar se todos os produtos são exibidos corretamente.
+
+- **Testar busca/filtragem:**
+  - Inserir um termo de busca.
+  - Verificar se apenas os produtos correspondentes são exibidos.
+
 ## CreateAndEdit 
 
 **Objetivo:**  
@@ -131,39 +164,6 @@ Verificar se a funcionalidade de exclusão de produtos funciona corretamente.
   - Selecionar um produto para excluir.
   - Confirmar a ação de exclusão.
   - Verificar se o produto foi removido da lista.
-
-## ListProducts
-
-**Objetivo:**  
-Verificar se a lista de produtos é exibida corretamente e se a busca/filtragem funciona.
-
-- **Setup:**  
-  Renderizar o componente de lista de produtos.
-
-- **Testar exibição de produtos:**
-  - Verificar se todos os produtos são exibidos corretamente.
-
-- **Testar busca/filtragem:**
-  - Inserir um termo de busca.
-  - Verificar se apenas os produtos correspondentes são exibidos.
-
-## Login
-
-**Objetivo:**  
-Verificar se a funcionalidade de login funciona corretamente.
-
-- **Setup:**  
-  Renderizar o componente de login.
-
-- **Testar login com credenciais válidas:**
-  - Preencher o formulário de login com credenciais válidas.
-  - Submeter o formulário.
-  - Verificar se o usuário foi redirecionado para a página correta.
-
-- **Testar login com credenciais inválidas:**
-  - Preencher o formulário de login com credenciais inválidas.
-  - Submeter o formulário.
-  - Verificar se a mensagem de erro apropriada é exibida.
 
 ## Modal
 
