@@ -100,7 +100,7 @@ Além disso, você pode usar a extensão "Jest Runner" do VS Code para facilitar
 
 Este projeto inclui uma série de testes para garantir que as principais funcionalidades estejam funcionando corretamente. A seguir, um resumo dos testes implementados.
 
-## CreateAndEdit Test
+## CreateAndEdit 
 
 **Objetivo:**  
 Verificar se o formulário de criação e edição de produtos funciona corretamente.
