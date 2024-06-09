@@ -196,4 +196,9 @@ Verificar se os links de navegação funcionam corretamente.
   - Verificar se o usuário foi redirecionado para a página correta.
 
 
+## Demo do Layout
+
+![Simplify Demo](https://github.com/Emaus-Leonardo/Crud-Products/assets/126693677/644f1b9c-7415-4eb7-90c3-36c9251905ab)
+
+
 ## Conclusão
