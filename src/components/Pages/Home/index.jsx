@@ -6,7 +6,7 @@ export default function HomePage() {
     <div>
       <section className=" h-screen flex justify-center items-center text-black bg-[#F4F6F8]">
         <div className="max-w-[1000px] container mx-auto ">
-          <div className="flex md:justify-between justify-center items-center ">
+          <div className="flex md:justify-between justify-center items-center md:px-10">
             <div className="flex flex-col justify-center ">
               <h1 className="text-5xl lg:text-7xl font-bold leading-tight mb-4 text-center md:text-left">Be Focus and <br /> Productive</h1>
               <p className="text-lg md:text-[15px] mb-8 text-center md:text-left">Teste seus limites e alcance seus objetivos.</p>
