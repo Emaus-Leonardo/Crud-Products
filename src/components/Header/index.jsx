@@ -22,7 +22,7 @@ function Header() {
           to="/" 
           className="max-w-[200px]" 
           onClick={handleLogoClick}>
-          <p className={`text-[22px] font-bold text-black ${linkPressionado === "/" ? "active" : ""}`}>Simplify</p>
+          <p className={`text-[22px] font-bold text-black ${linkPressionado === "/" ? "active" : ""}`}>Bevi</p>
         </Link>
         <nav className="hidden xl:flex lg:flex gap-x-16 font-semibold cursor-pointer bg-[#F4F6F8] rounded-full p-2 w-[460px] h-[40px] items-center justify-center">
           <Link

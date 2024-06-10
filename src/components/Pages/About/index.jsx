@@ -9,7 +9,7 @@ function AboutPage() {
                     <div>
                         <h1 className='text-[32px] font-bold'>Sobre Nós</h1>
                     </div>
-                    <div className='md:w-[800px] w-[450px] h-[300px] bg-slate-200 rounded-lg'></div>
+                    <div className='md:w-[800px] w-[450px] h-[300px] bg-[#D1D5DB] rounded-lg'></div>
                     
                     <p className='px-5 text-center'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea ex quod, quos voluptatibus delectus inventore? Voluptates, laborum laudantium rem, a ipsam alias nostrum minus omnis temporibus, nemo fugiat deserunt quis!</p>
                 </div>

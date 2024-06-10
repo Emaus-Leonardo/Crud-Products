@@ -22,10 +22,10 @@ export default function HomePage() {
             </div>
 
               <div className="hidden md:grid md:grid-cols-2 justify-center items-center gap-5">
-                <div className="w-[160px] h-[200px] lg:w-[200px] lg:h-[250px] bg-gray-300 rounded-lg"></div>
-                <div className="w-[160px] h-[160px] lg:w-[200px] lg:h-[200px] bg-gray-300 rounded-lg mt-16"></div>
-                <div className="w-[160px] h-[160px] lg:w-[200px] lg:h-[200px] bg-gray-300 rounded-lg mb-16"></div>
-                <div className="w-[160px] h-[200px] lg:w-[200px] lg:h-[250px] bg-gray-300 rounded-lg"></div>
+                <div className="w-[160px] h-[200px] lg:w-[200px] lg:h-[250px] bg-[#D1D5DB] rounded-lg"></div>
+                <div className="w-[160px] h-[160px] lg:w-[200px] lg:h-[200px] bg-[#D1D5DB] rounded-lg mt-16"></div>
+                <div className="w-[160px] h-[160px] lg:w-[200px] lg:h-[200px] bg-[#D1D5DB] rounded-lg mb-16"></div>
+                <div className="w-[160px] h-[200px] lg:w-[200px] lg:h-[250px] bg-[#D1D5DB] rounded-lg"></div>
               </div>
             </div>
         </div>
