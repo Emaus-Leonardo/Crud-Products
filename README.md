@@ -130,5 +130,5 @@ Verificar se os links de navegação funcionam corretamente.
 
 ## Demo do Layout
 
-![Simplify Demo](https://github.com/Emaus-Leonardo/Crud-Products/assets/126693677/644f1b9c-7415-4eb7-90c3-36c9251905ab)
+![Bevi Demo](https://github.com/Emaus-Leonardo/Crud-Products/assets/126693677/d2cc4129-3ddb-47b1-8369-34977a1ae896)
 
