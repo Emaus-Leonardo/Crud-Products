@@ -53,7 +53,6 @@ const FormProducts = forwardRef(({ isEditing, editingProduct, onCloseModal, onPr
       if (isEditing) {
         const confirmed = window.confirm("Tem certeza que deseja atualizar este produto?");
         if (!confirmed) return; 
-
         // Se estiver em modo de edição, a função editProduct é chamada
         const result = await editProduct(tokenResponse.access_token, editingProduct.id, data);
         console.log(result);

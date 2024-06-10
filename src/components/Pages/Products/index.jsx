@@ -30,7 +30,7 @@ function ProductsPage() {
   };
 
 
-  // ffunção que faz a listagem de produtos 
+  // função que faz a listagem de produtos 
   const fetchProducts = async () => {
     try {
       const tokenResponse = await login();
@@ -190,7 +190,7 @@ function ProductsPage() {
 
             <FormProducts
               ref={formRef}
-              isEditing={isEditing} //passa se esta em edição
+              isEditing={isEditing} //passa para o edtado de edição
               editingProduct={editProducts} //passa o produto para edição 
               onCloseModal={handleCloseModal}
               onProductCreated={fetchProducts} //função que busca o produto ao criar ou editar 
